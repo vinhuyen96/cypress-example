@@ -1,6 +1,6 @@
-import LoginPage from '../support/pages/loginPage';
-import ManagerPage from '../support/pages/managerPage';
-import EditCustomerPage from '../support/pages/editCustomerPage';
+import LoginPage from '../../support/pages/LoginPage';
+import ManagerPage from '../../support/pages/ManagerPage';
+import EditCustomerPage from '../../support/pages/customer/EditCustomerPage';
 
 describe('Edit Customer Functionality', () => {
 	const loginPage = new LoginPage();

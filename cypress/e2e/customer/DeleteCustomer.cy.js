@@ -1,6 +1,6 @@
-import LoginPage from '../support/pages/loginPage';
-import ManagerPage from '../support/pages/managerPage';
-import DeleteCustomerPage from '../support/pages/deleteCustomerPage';
+import LoginPage from '../../support/pages/LoginPage';
+import ManagerPage from '../../support/pages/ManagerPage';
+import DeleteCustomerPage from '../../support/pages/customer/DeleteCustomerPage';
 
 
 describe('Delete Customer Functionality', () => {

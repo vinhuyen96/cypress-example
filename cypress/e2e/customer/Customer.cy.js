@@ -1,7 +1,7 @@
-import LoginPage from '../support/pages/LoginPage';
-import ManagerPage from '../support/pages/managerPage';
-import CustomerPage from '../support/pages/customerPage';
-import {customer} from "../fixtures/customerData";
+import LoginPage from '../../support/pages/LoginPage';
+import ManagerPage from '../../support/pages/ManagerPage';
+import CustomerPage from '../../support/pages/customer/CustomerPage';
+import {customer} from "../../fixtures/customerData";
 
 describe('Customer Management', () => {
 	const loginPage = new LoginPage();

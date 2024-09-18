@@ -14,6 +14,7 @@ class CustomerPage extends BasePage {
 		this.customerEmailField = 'input[name=emailid]'
 		this.customerPasswordField = 'input[name=password]'
 		this.submitButton = '[type=submit]'
+		this.assertion = 'Customer Registered Successfully!!!'
 	}
 	enterCustomerName(name) {
 		this.typeInInput(this.customerNameField, name)
@@ -60,7 +61,7 @@ class CustomerPage extends BasePage {
 	}
 
 	verifyCustomerAddedSuccessfully() {
-		cy.get('body').should('contain', 'Customer Registered Successfully!!!');
+		this.verifyTextInBody(this.assertion)
 	}
 }
 

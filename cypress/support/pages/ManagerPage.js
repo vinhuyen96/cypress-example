@@ -8,6 +8,9 @@ class ManagerPage {
 		cy.get('a[href="editAccount.php"]').should('exist');
 		cy.get('a[href="deleteAccountInput.php"]').should('exist');
 		cy.get('a[href="DepositInput.php"]').should('exist');
+		cy.get('a[href="BalEngInput.php"]').should('exist');
+		cy.get('a[href="WithdrawalInput.php"]').should('exist');
+		cy.get('a[href="FundTransInput.php"]').should('exist');
 	}
 
 	navigateToAddCustomer() {
@@ -30,6 +33,15 @@ class ManagerPage {
 	}
 	navigateToDeposit() {
 		cy.get('a[href="DepositInput.php"]').click();
+	}
+	navigateToBalanceEnquiry() {
+		cy.get('a[href="BalEngInput.php"]').click();
+	}
+	navigateToWithdrawal() {
+		cy.get('a[href="WithdrawalInput.php"]').click();
+	}
+	navigateToFundTransfer() {
+		cy.get('a[href="FundTransInput.php"]').click();
 	}
 }
 

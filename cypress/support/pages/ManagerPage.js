@@ -7,6 +7,7 @@ class ManagerPage {
 		cy.get('a[href="addAccount.php"]').should('exist');
 		cy.get('a[href="editAccount.php"]').should('exist');
 		cy.get('a[href="deleteAccountInput.php"]').should('exist');
+		cy.get('a[href="DepositInput.php"]').should('exist');
 	}
 
 	navigateToAddCustomer() {
@@ -26,6 +27,9 @@ class ManagerPage {
 	}
 	navigateToDeleteAccount() {
 		cy.get('a[href="DeleteCustomerInput.php"]').click();
+	}
+	navigateToDeposit() {
+		cy.get('a[href="DepositInput.php"]').click();
 	}
 }
 

@@ -36,7 +36,7 @@ class CustomerPage {
 	}
 
 	enterPassword(password) {
-		cy.get('input[name=password"').type(password);
+		cy.get('input[name=password]').type(password);
 	}
 
 	submitNewCustomerForm() {

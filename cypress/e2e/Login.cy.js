@@ -6,7 +6,7 @@ describe('Login Functionality', () => {
 	const managerPage = new ManagerPage();
 
 	beforeEach(() => {
-		loginPage.navigate();  // Navigate to the login page before each test
+		loginPage.navigate(Cypress.config().baseUrl);  // Navigate to the login page before each test
 	});
 
 	it('should log in with valid credentials', () => {

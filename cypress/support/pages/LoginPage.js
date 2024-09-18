@@ -1,28 +1,23 @@
-// export class LoginPage {
-//     login = (account) => {
-//         cy.visit('https://demo.guru99.com/V4/')
-//         cy.get('input[name=uid]').type(account.userId)
-//         cy.get('input[name=password]').type(account.password)
-//         cy.get('input[name=btnLogin]').click()
-//         cy.get('marquee[class="heading3"]').contains("Welcome To Manager's Page of Guru99 Bank").should('be.visible')
-//       }
-// }
+import BasePage from './basePage';
 
-class LoginPage {
-    navigate() {
-        cy.visit('https://demo.guru99.com/V4/');
+class LoginPage extends BasePage {
+    constructor() {
+        super();
+        this.userIdField = 'input[name="uid"]'
+        this.passwordField = 'input[name="password"]';
+        this.loginButton = 'input[name="btnLogin"]'
     }
 
     enterUserId(userId) {
-        cy.get('input[name="uid"]').type(userId);
+        this.typeInInput(this.userIdField, userId)
     }
 
     enterPassword(password) {
-        cy.get('input[name="password"]').type(password);
+        this.typeInInput(this.passwordField, password)
     }
 
     clickLogin() {
-        cy.get('input[name="btnLogin"]').click();
+        this.clickElement(this.loginButton);
     }
 
     verifyLoginSuccess() {
@@ -35,3 +30,4 @@ class LoginPage {
 }
 
 export default LoginPage;
+

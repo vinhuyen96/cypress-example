@@ -10,8 +10,10 @@ describe('Login Functionality', () => {
 	});
 
 	it('should log in with valid credentials', () => {
-		loginPage.enterUserId('mngr589401');
-		loginPage.enterPassword('rupUqeg');
+		cy.fixture('account.json').then((account) => {
+			loginPage.enterUserId(account.userId);
+			loginPage.enterPassword(account.password);
+		});
 		loginPage.clickLogin();
 		loginPage.verifyLoginSuccess();
 		managerPage.verifyDashboardElements();

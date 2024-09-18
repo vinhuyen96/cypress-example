@@ -1,6 +1,7 @@
 import LoginPage from '../support/pages/LoginPage';
 import ManagerPage from '../support/pages/managerPage';
 import CustomerPage from '../support/pages/customerPage';
+import {customer} from "../fixtures/customerData";
 
 describe('Customer Management', () => {
 	const loginPage = new LoginPage();
@@ -8,9 +9,14 @@ describe('Customer Management', () => {
 	const customerPage = new CustomerPage();
 
 	beforeEach(() => {
-		loginPage.navigate();  // Navigate to the login page before each test
-		loginPage.enterUserId('mngr589401');
-		loginPage.enterPassword('rupUqeg');
+		//navigate
+		loginPage.navigate();
+
+		// read file account.json
+		cy.fixture('account.json').then((account) => {
+			loginPage.enterUserId(account.userId);
+			loginPage.enterPassword(account.password);
+		});
 		loginPage.clickLogin();
 		loginPage.verifyLoginSuccess();
 	});
@@ -19,15 +25,16 @@ describe('Customer Management', () => {
 		managerPage.navigateToAddCustomer();
 
 		// Fill in new customer details
-		customerPage.enterCustomerName('John Doe');
-		customerPage.enterDateOfBirth('1985-10-15');
-		customerPage.enterAddress('123 Main St');
-		customerPage.enterCity('New York');
-		customerPage.enterState('NY');
-		customerPage.enterPin('123456');
-		customerPage.enterMobileNumber('1234567890');
-		customerPage.enterEmail(`test${Date.now()}@gmail.com`);
-		customerPage.enterPassword('test123');
+		customerPage.enterCustomerName(customer.name);
+		customerPage.enterDateOfBirth(customer.dob);
+		customerPage.pickCustomerGender()
+		customerPage.enterAddress(customer.address);
+		customerPage.enterCity(customer.city);
+		customerPage.enterState(customer.state);
+		customerPage.enterPin(customer.pin);
+		customerPage.enterMobileNumber(customer.mobile);
+		customerPage.enterEmail(customer.email);
+		customerPage.enterPassword(customer.password);
 		customerPage.submitNewCustomerForm();
 
 		// Verify customer was added successfully

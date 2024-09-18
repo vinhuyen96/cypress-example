@@ -3,40 +3,44 @@ class CustomerPage {
 		cy.get('input[name="name"]').type(name);
 	}
 
+	pickCustomerGender() {
+		cy.get('[type="radio"]').first().check()
+	}
+
 	enterDateOfBirth(dob) {
-		cy.get('input[name="dob"]').type(dob);
+		cy.get('[type="date"]').type(dob);
 	}
 
 	enterAddress(address) {
-		cy.get('textarea[name="addr"]').type(address);
+		cy.get('textarea[name=addr]').type(address);
 	}
 
 	enterCity(city) {
-		cy.get('input[name="city"]').type(city);
+		cy.get('input[name=city]').type(city);
 	}
 
 	enterState(state) {
-		cy.get('input[name="state"]').type(state);
+		cy.get('input[name=state]').type(state);
 	}
 
 	enterPin(pin) {
-		cy.get('input[name="pinno"]').type(pin);
+		cy.get('input[name=pinno]').type(pin);
 	}
 
 	enterMobileNumber(mobile) {
-		cy.get('input[name="telephoneno"]').type(mobile);
+		cy.get('input[name=telephoneno]').type(mobile);
 	}
 
 	enterEmail(email) {
-		cy.get('input[name="emailid"]').type(email);
+		cy.get('input[name=emailid]').type(email);
 	}
 
 	enterPassword(password) {
-		cy.get('input[name="password"]').type(password);
+		cy.get('input[name=password"').type(password);
 	}
 
 	submitNewCustomerForm() {
-		cy.get('input[name="sub"]').click();
+		cy.get('[type=submit]').click()
 	}
 
 	verifyCustomerAddedSuccessfully() {

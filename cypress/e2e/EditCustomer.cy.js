@@ -9,8 +9,10 @@ describe('Edit Customer Functionality', () => {
 
 	beforeEach(() => {
 		loginPage.navigate();
-		loginPage.enterUserId('mngr589401');
-		loginPage.enterPassword('rupUqeg');
+		cy.fixture('account.json').then((account) => {
+			loginPage.enterUserId(account.userId);
+			loginPage.enterPassword(account.password);
+		});
 		loginPage.clickLogin();
 		loginPage.verifyLoginSuccess();
 	});

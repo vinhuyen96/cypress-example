@@ -2,6 +2,7 @@ import LoginPage from '../support/pages/loginPage';
 import ManagerPage from '../support/pages/managerPage';
 import DeleteCustomerPage from '../support/pages/deleteCustomerPage';
 
+
 describe('Delete Customer Functionality', () => {
 	const loginPage = new LoginPage();
 	const managerPage = new ManagerPage();
@@ -9,15 +10,17 @@ describe('Delete Customer Functionality', () => {
 
 	beforeEach(() => {
 		loginPage.navigate();
-		loginPage.enterUserId('mngr589401');
-		loginPage.enterPassword('rupUqeg');
+		cy.fixture('account.json').then((account) => {
+			loginPage.enterUserId(account.userId);
+			loginPage.enterPassword(account.password);
+		});
 		loginPage.clickLogin();
 		loginPage.verifyLoginSuccess();
 	});
 
 	it('should delete a customer successfully', () => {
 		managerPage.navigateToDeleteCustomer();
-		deleteCustomerPage.enterCustomerId('12345');  // Replace with valid Customer ID
+		deleteCustomerPage.enterCustomerId('12345');
 		deleteCustomerPage.submitDeleteCustomerForm();
 		deleteCustomerPage.confirmDeletion();
 		deleteCustomerPage.verifyCustomerDeletedSuccessfully();
@@ -25,7 +28,7 @@ describe('Delete Customer Functionality', () => {
 
 	it('should display error for invalid customer ID', () => {
 		managerPage.navigateToDeleteCustomer();
-		deleteCustomerPage.enterCustomerId('invalidId');
+		deleteCustomerPage.enterCustomerId('4324344');
 		deleteCustomerPage.submitDeleteCustomerForm();
 		deleteCustomerPage.verifyCustomerNotFound();
 	});

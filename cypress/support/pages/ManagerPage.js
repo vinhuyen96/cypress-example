@@ -13,6 +13,8 @@ class ManagerPage extends BasePage{
 		this.balanceEnquiryLink = 'a[href="BalEngInput.php"]'
 		this.withdrawalLink = 'a[href="WithdrawalInput.php"]'
 		this.fundTransferLink = 'a[href="FundTransInput.php"]'
+		this.changePasswordLink = 'a[href="PasswordInput.php"]'
+		this.logoutLink = 'a[href="Logout.php"]'
 	}
 
 	verifyDashboardElements() {
@@ -27,6 +29,8 @@ class ManagerPage extends BasePage{
 		cy.get(this.balanceEnquiryLink).should('exist')
 		cy.get(this.withdrawalLink).should('exist')
 		cy.get(this.fundTransferLink).should('exist')
+		cy.get(this.changePasswordLink).should('exist')
+		cy.get(this.logoutLink).should('exist')
 	}
 
 	navigateToAddCustomer() {
@@ -58,6 +62,12 @@ class ManagerPage extends BasePage{
 	}
 	navigateToFundTransfer() {
 		this.clickElement(this.fundTransferLink)
+	}
+	navigateToChangePassword() {
+		this.clickElement(this.changePasswordLink)
+	}
+	navigateToLogout() {
+		this.clickElement(this.logoutLink)
 	}
 }
 

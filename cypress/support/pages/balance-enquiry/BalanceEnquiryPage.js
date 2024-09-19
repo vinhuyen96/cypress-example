@@ -1,22 +1,27 @@
-class BalanceEnquiryPage {
-	navigateToBalanceEnquiry() {
-		cy.get('a[href="BalEnqInput.php"]').click();
-	}
+import BasePage from "../BasePage";
 
+class BalanceEnquiryPage extends BasePage{
+	constructor() {
+		super();
+		this.accountIdField = 'input[name="accountno"]'
+		this.submitBalanceEnquiryBtn = 'input[name="AccSubmit"]'
+		this.balanceEnquirySuccessfullyMsg = 'Balance Details for Account'
+		this.accountNotFoundMsg = 'Account does not exist'
+	}
 	enterAccountId(accountId) {
-		cy.get('input[name="accountno"]').type(accountId);
+		this.typeInInput(this.accountIdField, accountId)
 	}
 
 	submitBalanceEnquiryForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.submitBalanceEnquiryBtn)
 	}
 
 	verifyBalanceEnquirySuccessful() {
-		cy.get('body').should('contain', 'Balance Details for Account');
+		this.verifyTextInBody(this.balanceEnquirySuccessfullyMsg)
 	}
 
 	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+		this.verifyTextInBody(this.accountNotFoundMsg)
 	}
 }
 

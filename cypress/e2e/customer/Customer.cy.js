@@ -1,27 +1,16 @@
-import LoginPage from '../../support/pages/LoginPage';
 import ManagerPage from '../../support/pages/ManagerPage';
 import CustomerPage from '../../support/pages/customer/CustomerPage';
 import {customer} from "../../fixtures/customerData";
 
 describe('Customer Management', () => {
-	const loginPage = new LoginPage();
 	const managerPage = new ManagerPage();
 	const customerPage = new CustomerPage();
 
 	beforeEach(() => {
-		//navigate
-		loginPage.navigate();
-
-		// read file account.json
-		cy.fixture('account.json').then((account) => {
-			loginPage.enterUserId(account.userId);
-			loginPage.enterPassword(account.password);
-		});
-		loginPage.clickLogin();
-		loginPage.verifyLoginSuccess();
+		cy.login()
 	});
 
-	it('should add a new customer', () => {
+	it('Add a new customer', () => {
 		managerPage.navigateToAddCustomer();
 
 		// Fill in new customer details

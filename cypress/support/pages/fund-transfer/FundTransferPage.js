@@ -1,34 +1,42 @@
-class FundTransferPage {
-	navigateToFundTransfer() {
-		cy.get('a[href="FundTransInput.php"]').click();
-	}
+import BasePage from "../BasePage";
 
+class FundTransferPage extends BasePage{
+	constructor() {
+		super()
+		this.payerAccountField = 'input[name="payersaccount"]'
+		this.payeeAccountField = 'input[name="payeeaccount"]'
+		this.amountField = 'input[name="ammount"]'
+		this.descriptionField = 'input[name="desc"]'
+		this.fundTransferBtn = 'input[name="AccSubmit"]'
+		this.fundTransferSuccessfullMsg = 'Fund Transfer Details'
+		this.payeeNotFoundMsg = 'Fund Transfer Details'
+	}
 	enterPayersAccountId(accountId) {
-		cy.get('input[name="payersaccount"]').type(accountId);
+		this.typeInInput(this.payerAccountField, accountId)
 	}
 
 	enterPayeesAccountId(accountId) {
-		cy.get('input[name="payeeaccount"]').type(accountId);
+		this.typeInInput(this.payeeAccountField, accountId)
 	}
 
 	enterAmount(amount) {
-		cy.get('input[name="ammount"]').type(amount);
+		this.typeInInput(this.amountField, amount)
 	}
 
 	enterDescription(description) {
-		cy.get('input[name="desc"]').type(description);
+		this.typeInInput(this.descriptionField, description)
 	}
 
 	submitFundTransferForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.fundTransferBtn)
 	}
 
 	verifyFundTransferSuccessful() {
-		cy.get('body').should('contain', 'Fund Transfer Details');
+		this.verifyTextInBody(this.fundTransferSuccessfullMsg)
 	}
 
-	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+	verifyPayeeNotFound() {
+		this.verifyTextInBody(this.payeeNotFoundMsg)
 	}
 }
 

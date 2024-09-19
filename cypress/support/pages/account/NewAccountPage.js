@@ -1,30 +1,38 @@
-class NewAccountPage {
-	navigateToAddNewAccount() {
-		cy.get('a[href="addAccount.php"]').click();
+import BasePage from "../BasePage";
+
+class NewAccountPage extends BasePage{
+	constructor() {
+		super();
+		this.customerIdField = 'input[name="cusid"]'
+		this.accountTypeField = 'select[name="selaccount"]'
+		this.initialDepositField = 'input[name="inideposit"]'
+		this.addAccountBtn = 'input[name="button2"]'
+		this.createdSucessfullyField = 'Account Generated Successfully!!!'
+		this.errorMessageInvalidCustomerId = 'Customer does not exist'
 	}
 
 	enterCustomerId(customerId) {
-		cy.get('input[name="cusid"]').type(customerId);
+		this.typeInInput(this.customerIdField, customerId)
 	}
 
 	selectAccountType(accountType) {
-		cy.get('select[name="selaccount"]').select(accountType);
+		cy.get(this.accountTypeField).select(accountType)
 	}
 
 	enterInitialDeposit(deposit) {
-		cy.get('input[name="inideposit"]').type(deposit);
+		this.typeInInput(this.initialDepositField, deposit)
 	}
 
 	submitNewAccountForm() {
-		cy.get('input[name="button2"]').click();
+		this.clickElement(this.addAccountBtn)
 	}
 
 	verifyAccountCreatedSuccessfully() {
-		cy.get('body').should('contain', 'Account Generated Successfully!!!');
+		this.verifyTextInBody(this.createdSucessfullyField)
 	}
 
 	verifyErrorForInvalidCustomerId() {
-		cy.get('body').should('contain', 'Customer does not exist');
+		this.verifyTextInBody(this.errorMessageInvalidCustomerId)
 	}
 }
 

@@ -1,30 +1,38 @@
-class WithdrawalPage {
-	navigateToWithdrawal() {
-		cy.get('a[href="WithdrawalInput.php"]').click();
+import BasePage from "../BasePage";
+
+class WithdrawalPage extends BasePage{
+	constructor() {
+		super();
+		this.accountIdField = 'input[name="accountno"]'
+		this.amountField = 'input[name="ammount"]'
+		this.descriptionField = 'input[name="desc"]'
+		this.submitWithdrawalBtn = 'input[name="AccSubmit"]'
+		this.withdrawalSuccessfulMsg = 'Transaction details of Withdrawal for Account'
+		this.accountNotFoundMsg = 'Account does not exist'
 	}
 
 	enterAccountId(accountId) {
-		cy.get('input[name="accountno"]').type(accountId);
+		this.typeInInput(this.accountIdField, accountId)
 	}
 
 	enterAmount(amount) {
-		cy.get('input[name="ammount"]').type(amount);
+		this.typeInInput(this.amountField, amount)
 	}
 
 	enterDescription(description) {
-		cy.get('input[name="desc"]').type(description);
+		this.typeInInput(this.descriptionField, description)
 	}
 
 	submitWithdrawalForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.submitWithdrawalBtn)
 	}
 
 	verifyWithdrawalSuccessful() {
-		cy.get('body').should('contain', 'Transaction details of Withdrawal for Account');
+		this.verifyTextInBody(this.withdrawalSuccessfulMsg)
 	}
 
 	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+		this.verifyTextInBody(this.accountNotFoundMsg)
 	}
 }
 

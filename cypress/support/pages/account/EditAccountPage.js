@@ -1,30 +1,39 @@
-class EditAccountPage {
-	navigateToEditAccount() {
-		cy.get('a[href="editAccount.php"]').click();
+import BasePage from "../BasePage";
+
+class EditAccountPage extends BasePage{
+	constructor() {
+		super()
+		this.accountIdField = 'input[name="accountno"]'
+		this.editAccountBtn = 'input[name="AccSubmit"]'
+		this.accountTypeSelect = 'select[name="a_type"]'
+		this.submitChangeBtn = 'input[name="button2"]'
+		this.updatedSuccessfullyMsg = 'Account details updated Successfully'
+		this.accountNotFoundMsg = 'Account does not exist'
+
 	}
 
 	enterAccountId(accountId) {
-		cy.get('input[name="accountno"]').type(accountId);
+		this.typeInInput(this.accountIdField, accountId)
 	}
 
 	submitEditAccountForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.editAccountBtn)
 	}
 
 	selectNewAccountType(accountType) {
-		cy.get('select[name="a_type"]').select(accountType);
+		cy.get(this.accountTypeSelect).select(accountType)
 	}
 
 	submitChanges() {
-		cy.get('input[name="button2"]').click();
+		this.clickElement(this.submitChangeBtn)
 	}
 
 	verifyAccountUpdatedSuccessfully() {
-		cy.get('body').should('contain', 'Account details updated Successfully');
+		this.verifyTextInBody(this.updatedSuccessfullyMsg)
 	}
 
 	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+		this.verifyTextInBody(this.accountNotFoundMsg)
 	}
 }
 

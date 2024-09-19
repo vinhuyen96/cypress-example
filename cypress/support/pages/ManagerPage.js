@@ -1,47 +1,63 @@
-class ManagerPage {
+import BasePage from "./BasePage";
+
+class ManagerPage extends BasePage{
+	constructor() {
+		super()
+		this.newCustomerLink = 'a[href="addcustomerpage.php"]'
+		this.editCustomerLink = 'a[href="EditCustomer.php"]'
+		this.deleteCustomerLink = 'a[href="DeleteCustomerInput.php"]'
+		this.newAccountLink = 'a[href="addAccount.php"]'
+		this.editAccountLink = 'a[href="editAccount.php"]'
+		this.deleteAccountLink = 'a[href="deleteAccountInput.php"]'
+		this.depositLink = 'a[href="DepositInput.php"]'
+		this.balanceEnquiryLink = 'a[href="BalEngInput.php"]'
+		this.withdrawalLink = 'a[href="WithdrawalInput.php"]'
+		this.fundTransferLink = 'a[href="FundTransInput.php"]'
+	}
+
 	verifyDashboardElements() {
 		// Check that key elements are visible on the Manager dashboard
-		cy.get('a[href="addcustomerpage.php"]').should('exist');
-		cy.get('a[href="EditCustomer.php"]').should('exist');
-		cy.get('a[href="DeleteCustomerInput.php"]').should('exist');
-		cy.get('a[href="addAccount.php"]').should('exist');
-		cy.get('a[href="editAccount.php"]').should('exist');
-		cy.get('a[href="deleteAccountInput.php"]').should('exist');
-		cy.get('a[href="DepositInput.php"]').should('exist');
-		cy.get('a[href="BalEngInput.php"]').should('exist');
-		cy.get('a[href="WithdrawalInput.php"]').should('exist');
-		cy.get('a[href="FundTransInput.php"]').should('exist');
+		cy.get(this.newCustomerLink).should('exist')
+		cy.get(this.editCustomerLink).should('exist')
+		cy.get(this.deleteCustomerLink).should('exist')
+		cy.get(this.newAccountLink).should('exist')
+		cy.get(this.editAccountLink).should('exist')
+		cy.get(this.deleteAccountLink).should('exist')
+		cy.get(this.depositLink).should('exist')
+		cy.get(this.balanceEnquiryLink).should('exist')
+		cy.get(this.withdrawalLink).should('exist')
+		cy.get(this.fundTransferLink).should('exist')
 	}
 
 	navigateToAddCustomer() {
-		cy.get('a[href="addcustomerpage.php"]').click();
+		this.clickElement(this.newCustomerLink)
 	}
 	navigateToEditCustomer() {
-		cy.get('a[href="EditCustomer.php"]').click();
+		this.clickElement(this.editCustomerLink)
 	}
 	navigateToDeleteCustomer() {
-		cy.get('a[href="DeleteCustomerInput.php"]').click();
+		this.clickElement(this.deleteCustomerLink)
 	}
 	navigateToAddNewAccount() {
-		cy.get('a[href="addAccount.php"]').click();
+		this.clickElement(this.newAccountLink)
 	}
 	navigateToEditAccount() {
-		cy.get('a[href="editAccount.php"]').click();
+		this.clickElement(this.editAccountLink)
 	}
 	navigateToDeleteAccount() {
-		cy.get('a[href="DeleteCustomerInput.php"]').click();
+		this.clickElement(this.deleteCustomerLink)
 	}
 	navigateToDeposit() {
-		cy.get('a[href="DepositInput.php"]').click();
+		this.clickElement(this.depositLink)
 	}
 	navigateToBalanceEnquiry() {
-		cy.get('a[href="BalEngInput.php"]').click();
+		this.clickElement(this.balanceEnquiryLink)
 	}
 	navigateToWithdrawal() {
-		cy.get('a[href="WithdrawalInput.php"]').click();
+		this.clickElement(this.withdrawalLink)
 	}
 	navigateToFundTransfer() {
-		cy.get('a[href="FundTransInput.php"]').click();
+		this.clickElement(this.fundTransferLink)
 	}
 }
 

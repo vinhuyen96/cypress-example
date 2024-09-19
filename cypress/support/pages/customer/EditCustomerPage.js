@@ -1,30 +1,38 @@
-class EditCustomerPage {
-	navigateToEditCustomer() {
-		cy.get('a[href="EditCustomer.php"]').click();
+import BasePage from "../BasePage";
+
+class EditCustomerPage extends BasePage{
+	constructor() {
+		super()
+		this.customerIdField = 'input[name="cusid"]'
+		this.submitToGoCustomerEditBtn = 'input[name="AccSubmit"]'
+		this.customerNameField = 'input[name="name"]'
+		this.submitUpdateCustomerForm = 'input[name="sub"]'
+		this.updatedSuccessfullyMessage = 'Customer details updated Successfully'
+		this.customerNotFoundMessage = 'Customer does not exist'
 	}
 
 	enterCustomerId(customerId) {
-		cy.get('input[name="cusid"]').type(customerId);
+		this.typeInInput(this.customerIdField, customerId)
 	}
 
 	submitEditCustomerForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.submitToGoCustomerEditBtn)
 	}
 
 	editCustomerName(name) {
-		cy.get('input[name="name"]').clear().type(name);
+		this.typeInInput(this.customerNameField, name)
 	}
 
 	submitChanges() {
-		cy.get('input[name="sub"]').click();
+		this.clickElement(this.submitUpdateCustomerForm)
 	}
 
 	verifyCustomerUpdatedSuccessfully() {
-		cy.get('body').should('contain', 'Customer details updated Successfully');
+		this.verifyTextInBody(this.updatedSuccessfullyMessage)
 	}
 
 	verifyCustomerNotFound() {
-		cy.get('body').should('contain', 'Customer does not exist');
+		this.verifyTextInBody(this.customerNotFoundMessage)
 	}
 }
 

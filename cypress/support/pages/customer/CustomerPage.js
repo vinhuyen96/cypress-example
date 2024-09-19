@@ -1,50 +1,67 @@
-class CustomerPage {
+import BasePage from "../BasePage";
+
+class CustomerPage extends BasePage {
+	constructor() {
+		super()
+		this.customerNameField = 'input[name="name"]'
+		this.customerGenderField = '[type="radio"]'
+		this.customerDOBField = '[type="date"]'
+		this.customerAddressField = 'textarea[name=addr]'
+		this.customerCityField = 'input[name=city]'
+		this.customerStateField = 'input[name=state]'
+		this.customerPinField = 'input[name=pinno]'
+		this.customerPhoneNumberField = 'input[name=telephoneno]'
+		this.customerEmailField = 'input[name=emailid]'
+		this.customerPasswordField = 'input[name=password]'
+		this.submitButton = '[type=submit]'
+		this.assertion = 'Customer Registered Successfully!!!'
+	}
 	enterCustomerName(name) {
-		cy.get('input[name="name"]').type(name);
+		this.typeInInput(this.customerNameField, name)
 	}
 
 	pickCustomerGender() {
-		cy.get('[type="radio"]').first().check()
+		cy.get(this.customerGenderField).first().check()
 	}
 
 	enterDateOfBirth(dob) {
-		cy.get('[type="date"]').type(dob);
+		this.typeInInput(this.customerDOBField, dob)
 	}
 
 	enterAddress(address) {
-		cy.get('textarea[name=addr]').type(address);
+		this.typeInInput(this.customerAddressField, address)
 	}
 
 	enterCity(city) {
-		cy.get('input[name=city]').type(city);
+		this.typeInInput(this.customerCityField, city)
 	}
 
 	enterState(state) {
-		cy.get('input[name=state]').type(state);
+		this.typeInInput(this.customerStateField, state)
 	}
 
 	enterPin(pin) {
-		cy.get('input[name=pinno]').type(pin);
+		this.typeInInput(this.customerPinField, pin)
 	}
 
 	enterMobileNumber(mobile) {
-		cy.get('input[name=telephoneno]').type(mobile);
+		this.typeInInput(this.customerPhoneNumberField, mobile)
 	}
 
 	enterEmail(email) {
-		cy.get('input[name=emailid]').type(email);
+		this.typeInInput(this.customerEmailField, email)
 	}
 
 	enterPassword(password) {
-		cy.get('input[name=password]').type(password);
+		this.typeInInput(this.customerPasswordField, password)
 	}
 
 	submitNewCustomerForm() {
-		cy.get('[type=submit]').click()
+		this.clickElement(this.submitButton)
 	}
 
 	verifyCustomerAddedSuccessfully() {
-		cy.get('body').should('contain', 'Customer Registered Successfully!!!');
+		this.verifyTextInBody(this.assertion)
 	}
 }
 

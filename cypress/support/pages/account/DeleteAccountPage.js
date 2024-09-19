@@ -1,29 +1,36 @@
-class DeleteAccountPage {
-	navigateToDeleteAccount() {
-		cy.get('a[href="deleteAccountInput.php"]').click();
+import BasePage from "../BasePage";
+
+class DeleteAccountPage extends BasePage {
+	constructor() {
+		super()
+		this.accountIdField = 'input[name="accountno"]'
+		this.deleteAccountBtn = 'input[name="AccSubmit"]'
+		this.confirmDeletionMessage = 'Do you really want to delete this Account?'
+		this.deletedSuccessfullyMsg = 'Account Deleted Sucessfully'
+		this.accountNotFoundMsg = 'Account does not exist'
 	}
 
 	enterAccountId(accountId) {
-		cy.get('input[name="accountno"]').type(accountId);
+		this.typeInInput(this.accountIdField, accountId)
 	}
 
 	submitDeleteAccountForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.deleteAccountBtn)
 	}
 
 	confirmDeletion() {
 		cy.on('window:confirm', (str) => {
-			expect(str).to.eq('Do you really want to delete this Account?');
-			return true;
+			expect(str).to.eq(this.confirmDeletionMessage)
+			return true
 		});
 	}
 
 	verifyAccountDeletedSuccessfully() {
-		cy.get('body').should('contain', 'Account Deleted Sucessfully');
+		this.verifyTextInBody(this.deletedSuccessfullyMsg)
 	}
 
 	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+		this.verifyTextInBody(this.accountNotFoundMsg)
 	}
 }
 

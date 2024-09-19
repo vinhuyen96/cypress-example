@@ -1,34 +1,28 @@
-import LoginPage from '../../support/pages/LoginPage';
 import ManagerPage from '../../support/pages/ManagerPage';
 import EditCustomerPage from '../../support/pages/customer/EditCustomerPage';
 
+import { faker } from '@faker-js/faker';
+
 describe('Edit Customer Functionality', () => {
-	const loginPage = new LoginPage();
 	const managerPage = new ManagerPage();
 	const editCustomerPage = new EditCustomerPage();
 
 	beforeEach(() => {
-		loginPage.navigate();
-		cy.fixture('account.json').then((account) => {
-			loginPage.enterUserId(account.userId);
-			loginPage.enterPassword(account.password);
-		});
-		loginPage.clickLogin();
-		loginPage.verifyLoginSuccess();
+		cy.login()
 	});
 
 	it('should edit an existing customer', () => {
 		managerPage.navigateToEditCustomer();
-		editCustomerPage.enterCustomerId('12345');  // Replace with valid Customer ID
+		editCustomerPage.enterCustomerId('12345');  // Need to be a dynamic Id - research save data after creating
 		editCustomerPage.submitEditCustomerForm();
-		editCustomerPage.editCustomerName('John Updated');
+		editCustomerPage.editCustomerName(faker.person.firstName());
 		editCustomerPage.submitChanges();
 		editCustomerPage.verifyCustomerUpdatedSuccessfully();
 	});
 
 	it('should display an error for invalid customer ID', () => {
 		managerPage.navigateToEditCustomer();
-		editCustomerPage.enterCustomerId('invalidId');
+		editCustomerPage.enterCustomerId('1232');
 		editCustomerPage.submitEditCustomerForm();
 		editCustomerPage.verifyCustomerNotFound();
 	});

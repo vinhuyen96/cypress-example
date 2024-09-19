@@ -1,5 +1,5 @@
-import LoginPage from '../support/pages/LoginPage';
-import ManagerPage from '../support/pages/ManagerPage';
+import LoginPage from '../../support/pages/auth/LoginPage';
+import ManagerPage from '../../support/pages/ManagerPage';
 
 describe('Login Functionality', () => {
 	const loginPage = new LoginPage()

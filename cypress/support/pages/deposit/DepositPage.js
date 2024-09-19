@@ -1,30 +1,38 @@
-class DepositPage {
-	navigateToDeposit() {
-		cy.get('a[href="DepositInput.php"]').click();
+import BasePage from "../BasePage";
+
+class DepositPage extends BasePage{
+	constructor() {
+		super()
+		this.accountIdField = 'input[name="accountno"]'
+		this.amountField = 'input[name="ammount"]'
+		this.descriptionField = 'input[name="desc"]'
+		this.submitDepositbtn = 'input[name="AccSubmit"]'
+		this.depositSuccessfullyMsg = 'Transaction details of Deposit for Account'
+		this.accountNotFoundMsg = 'Account does not exist'
 	}
 
 	enterAccountId(accountId) {
-		cy.get('input[name="accountno"]').type(accountId);
+		this.typeInInput(this.accountIdField, accountId)
 	}
 
 	enterAmount(amount) {
-		cy.get('input[name="ammount"]').type(amount);
+		this.typeInInput(this.amountField, amount)
 	}
 
 	enterDescription(description) {
-		cy.get('input[name="desc"]').type(description);
+		this.typeInInput(this.descriptionField, description)
 	}
 
 	submitDepositForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.submitDepositbtn)
 	}
 
 	verifyDepositSuccessful() {
-		cy.get('body').should('contain', 'Transaction details of Deposit for Account');
+		this.verifyTextInBody(this.depositSuccessfullyMsg)
 	}
 
 	verifyAccountNotFound() {
-		cy.get('body').should('contain', 'Account does not exist');
+		this.verifyTextInBody(this.accountNotFoundMsg)
 	}
 }
 

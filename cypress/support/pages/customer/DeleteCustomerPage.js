@@ -1,29 +1,35 @@
-class DeleteCustomerPage {
-	navigateToDeleteCustomer() {
-		cy.get('a[href="DeleteCustomerInput.php"]').click();
+import BasePage from "../BasePage";
+
+class DeleteCustomerPage extends BasePage{
+	constructor() {
+		super()
+		this.customerId = 'input[name="cusid"]'
+		this.submitDeleteCustomer = 'input[name="AccSubmit"]'
+		this.deletedSuccessfullyMessage = 'Customer deleted Successfully'
+		this.deletedFailureMessage = 'Customer does not exist'
 	}
 
 	enterCustomerId(customerId) {
-		cy.get('input[name="cusid"]').type(customerId);
+		this.typeInInput(this.customerId, customerId)
 	}
 
 	submitDeleteCustomerForm() {
-		cy.get('input[name="AccSubmit"]').click();
+		this.clickElement(this.submitDeleteCustomer)
 	}
 
 	confirmDeletion() {
 		cy.on('window:confirm', (str) => {
-			expect(str).to.eq('Do you really want to delete this Customer?');
+			expect(str).to.eq('Do you really want to delete this Customer?')
 			return true;
 		});
 	}
 
 	verifyCustomerDeletedSuccessfully() {
-		cy.get('body').should('contain', 'Customer deleted Successfully');
+		this.verifyTextInBody(this.deletedSuccessfullyMessage)
 	}
 
 	verifyCustomerNotFound() {
-		cy.get('body').should('contain', 'Customer does not exist');
+		this.verifyTextInBody(this.deletedFailureMessage)
 	}
 }
 

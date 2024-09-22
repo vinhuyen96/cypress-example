@@ -8,11 +8,15 @@
     "url": "https://github.com/vinhuyen96/cypress-example"
   },
   "scripts": {
-    "local:test": "npx cypress open"
+    "test:ui": "npx cypress open",
+    "format": "prettier --write 'cypress/**/*.js'"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.1",
     "cypress": "^13.14.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0"
   }
 }

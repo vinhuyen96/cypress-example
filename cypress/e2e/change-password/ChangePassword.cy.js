@@ -1,10 +1,12 @@
 import ManagerPage from "../../support/pages/ManagerPage";
 import ChangePasswordPage from "../../support/pages/change-password/ChangePasswordPage";
+import { faker } from '@faker-js/faker';
 
 describe('Change Password Functionality', () => {
 	const managerPage = new ManagerPage()
 	const changePasswordPage = new ChangePasswordPage()
-
+	const newPass = faker.internet.password()
+	const notMatchPass = faker.internet.password()
 	beforeEach(() => {
 		cy.login()
 	});
@@ -14,8 +16,8 @@ describe('Change Password Functionality', () => {
 		cy.fixture('account.json').then((account) => {
 			changePasswordPage.enterOldPassword(account.password)
 		})
-		changePasswordPage.enterNewPassword('newPassword123')
-		changePasswordPage.confirmPassword('newPassword123')
+		changePasswordPage.enterNewPassword(newPass)
+		changePasswordPage.confirmPassword(newPass)
 		changePasswordPage.submitChangePassword()
 		changePasswordPage.verifyPasswordChangeSuccess()
 	});
@@ -25,8 +27,8 @@ describe('Change Password Functionality', () => {
 		cy.fixture('account.json').then((account) => {
 			changePasswordPage.enterOldPassword(account.password)
 		})
-		changePasswordPage.enterNewPassword('newPassword123')
-		changePasswordPage.confirmPassword('differentPassword123')
+		changePasswordPage.enterNewPassword(newPass)
+		changePasswordPage.confirmPassword(notMatchPass)
 		changePasswordPage.submitChangePassword();
 		changePasswordPage.verifyPasswordChangeFailure();
 	});
